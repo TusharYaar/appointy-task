@@ -12,7 +12,7 @@ func main() {
 	// Initialize Mongo DB
 	client,ctx,cancel := connection.Connect()
 	// responds to GET /user
-	http.HandleFunc("/",handlers.GetUser)
+	http.HandleFunc("/user/",handlers.GetUser)
 	// responds to POST /user
 	http.HandleFunc("/user",handlers.CreateUser)
 
