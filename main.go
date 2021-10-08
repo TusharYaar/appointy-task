@@ -7,23 +7,19 @@ import (
 	"time"
 
 	"github.com/tusharyaar/task/handlers"
+	"github.com/tusharyaar/task/models"
 
 	// MongoDb
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// Define User struct
-
-
-
-
 func main() {
 
 	// Initialize Mongo DB
-
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://task:1234567890@cluster0.a3iuv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
 	if err != nil {
 		panic(err)
@@ -40,9 +36,12 @@ func main() {
     panic(err)
 }
 	fmt.Println("Ping Successfull to MongoDB")
-
-
-// responds to GET /user
+	var user models.User
+	collection := client.Database("taskDB").Collection("user")
+	err = collection.FindOne(context.TODO(), bson.D{{"email","email@gmail.com"}}).Decode(&user)
+	
+	fmt.Println(user)
+	// responds to GET /user
 	http.HandleFunc("/",handlers.GetUser)
 
 	// responds to POST /user
