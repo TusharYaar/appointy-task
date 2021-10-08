@@ -7,7 +7,6 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var UserCollection *mongo.Collection
@@ -24,11 +23,11 @@ func Connect() (*mongo.Client, context.Context, context.CancelFunc) {
 		panic(err)
 	}
 	fmt.Println("Connected to MongoDB")
-	err = client.Ping(ctx, readpref.Primary())
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("Ping Successfull to MongoDB")
+	// err = client.Ping(ctx, readpref.Primary())
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println("Ping Successfull to MongoDB")
 	UserCollection = client.Database("taskDB").Collection("user")
 	PostCollection = client.Database("taskDB").Collection("post")
 
