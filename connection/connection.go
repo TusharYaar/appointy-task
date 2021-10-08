@@ -13,12 +13,12 @@ import (
 var UserCollection *mongo.Collection
 var PostCollection *mongo.Collection
 
-func Connect() (*mongo.Client, context.Context) {
+func Connect() (*mongo.Client, context.Context, context.CancelFunc) {
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://task:1234567890@cluster0.a3iuv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
 	if err != nil {
 		panic(err)
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	err = client.Connect(ctx)
 	if err != nil {
 		panic(err)
@@ -32,5 +32,5 @@ func Connect() (*mongo.Client, context.Context) {
 	UserCollection = client.Database("taskDB").Collection("user")
 	PostCollection = client.Database("taskDB").Collection("post")
 
-	return client,ctx
+	return client,ctx, cancel
 }
