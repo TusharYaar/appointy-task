@@ -2,7 +2,9 @@ package handlers
 
 import (
 	"context"
+	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/tusharyaar/task/connection"
@@ -21,6 +23,8 @@ func CreateUser(response http.ResponseWriter, request *http.Request) {
 	err:= connection.UserCollection.FindOne(context.TODO(), bson.D{{"email",user.Email}}).Decode(&existing_user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
+			// Hashing the password
+			user.Password =	fmt.Sprintf("%x",sha256.Sum256([]byte(user.Password)))
 			result, _ := connection.UserCollection.InsertOne(context.TODO(), user)
 			json.NewEncoder(response).Encode(result)
 		}  else {
