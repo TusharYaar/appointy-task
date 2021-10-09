@@ -40,7 +40,7 @@ func TestCreatePostWrongMethod(t *testing.T) {
 		t.Fatal(err)
 	}
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(handlers.CreateUser)
+	handler := http.HandlerFunc(handlers.CreatePost)
 	handler.ServeHTTP(rr, req)
 	if status := rr.Code; status != http.StatusMethodNotAllowed {
 		t.Errorf("handler returned wrong status code: got %v want %v",
@@ -57,7 +57,7 @@ func TestCreatePostWrongHeader(t *testing.T) {
 		t.Fatal(err)
 	}
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(handlers.CreateUser)
+	handler := http.HandlerFunc(handlers.CreatePost)
 	handler.ServeHTTP(rr, req)
 	if status := rr.Code; status != http.StatusUnsupportedMediaType {
 		t.Errorf("handler returned wrong status code: got %v want %v",
@@ -75,7 +75,7 @@ func TestCreatePostIncompleteDetails(t *testing.T) {
 	}
 	req.Header.Set("Content-Type", "application/json")	
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(handlers.CreateUser)
+	handler := http.HandlerFunc(handlers.CreatePost)
 	handler.ServeHTTP(rr, req)
 	if status := rr.Code; status != http.StatusBadRequest {
 		t.Errorf("handler returned wrong status code: got %v want %v",

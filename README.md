@@ -18,8 +18,8 @@ Submitted on 9th October, 2021
 
 [x] `/user` - 5 tests cases
 [x] `/user/<user_id>` - 4 tests cases
-[] `/post` - _ tests cases
-[] `/post/<post_id>` - _ tests cases
+[x] `/post` - 5 tests cases
+[x] `/post/<post_id>` - 4 tests cases
 [] `/post/user/<user_id>`- \_ tests cases
 
 # About Database
