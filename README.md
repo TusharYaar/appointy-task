@@ -54,3 +54,31 @@ name: "test"
 email: "test@test.com"
 number of posts: 1
 ```
+
+# Folder Structure
+
+```
+|- root
+    |-connection
+        |-connection.go
+    |-handlers                  //contains route handlers
+        |-create_post.go        // POST /post
+        |-create_user.go        // POST /user
+        |-get_post.go           // GET /post/<post_id>
+        |-get_posts_by_user.go  // GET /posts/user/<user_id>
+        |-get_user.go           // GET /user/<user_id>
+    |-models
+        |-post.go
+        |-user.go
+    |-testing                       //contains unit test for handlers
+        |-create_post_test.go       //POST /post
+        |-create_user_test.go       // POST /user
+        |-get_post_test.go          // GET /post/<post_id>
+        |get_post_by_user_test.go   //GET /posts/user/<user_id>
+        |get_user_test.go           // GET /user/<user_id>
+    |-go.mod
+    |-go.sum
+    |-main.go                       //Main Fnction
+    |-README.md
+
+```
