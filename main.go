@@ -3,9 +3,11 @@ package main
 import (
 	"net/http"
 
+	// Connection contains function to connect to database and defines collection
 	"github.com/tusharyaar/task/connection"
+
+	//Handlers contains all route handlers
 	"github.com/tusharyaar/task/handlers"
-	// MongoDb
 )
 
 func main() {

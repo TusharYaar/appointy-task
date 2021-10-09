@@ -64,6 +64,7 @@ func CreatePost(response http.ResponseWriter, request *http.Request) {
 		// User exists, create post
 		post.Posted_timestamp = time.Now();
 		result, _ := connection.PostCollection.InsertOne(context.TODO(), post)
+			response.WriteHeader(http.StatusCreated)
 			json.NewEncoder(response).Encode(result)
 		return
 	}

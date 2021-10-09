@@ -47,6 +47,7 @@ func CreateUser(response http.ResponseWriter, request *http.Request) {
 			// Hashing the password
 			user.Password =	fmt.Sprintf("%x",sha256.Sum256([]byte(user.Password)))
 			result, _ := connection.UserCollection.InsertOne(context.TODO(), user)
+			response.WriteHeader(http.StatusCreated)
 			json.NewEncoder(response).Encode(result)
 		}  else {
 			panic(err)
