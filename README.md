@@ -18,25 +18,26 @@ use `go run main.go` to start the server
 #### For Testing
 
 `cd testing`
+
 `go test`
 
 # Routes
 
-[x] `POST /user` adds new user<br>
-[x] `GET /user/<user_id>` returns details of specified user<br>
-[x] `POST /post` adds new post<br>
-[x] `GET /post/<post_id>` returns details of specified post<br>
-[x] `GET /post/user/<user_id>` returns all post by specific user
+- [x] `POST /user` adds new user<br>
+- [x] `GET /user/<user_id>` returns details of specified user<br>
+- [x] `POST /post` adds new post<br>
+- [x] `GET /post/<post_id>` returns details of specified post<br>
+- [x] `GET /post/user/<user_id>` returns all post by specific user
 
 # Testing
 
 `cd testing`
 
-[x] `/user` - 5 tests cases<br>
-[x] `/user/<user_id>` - 4 tests cases<br>
-[x] `/post` - 5 tests cases<br>
-[x] `/post/<post_id>` - 4 tests cases<br>
-[x] `/post/user/<user_id>`- 3 tests cases<br>
+- [x] `/user` - 5 tests cases<br>
+- [x] `/user/<user_id>` - 4 tests cases<br>
+- [x] `/post` - 5 tests cases<br>
+- [x] `/post/<post_id>` - 4 tests cases<br>
+- [x] `/post/user/<user_id>`- 3 tests cases<br>
 
 # About Database
 
