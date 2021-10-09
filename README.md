@@ -1,31 +1,32 @@
-#Details
-Made for appointy task
-Made by Tushar S Agrawal
-Reg no: 19BCE0559
-Submitted on 9th October, 2021
+# Details
+
+Made for appointy task<br>
+Made by Tushar S Agrawal<br>
+Reg no: 19BCE0559<br>
+Submitted on 9th October, 2021<br>
 
 # Routes
 
-[x] `POST /user` adds new user
-[x] `GET /user/<user_id>` returns details of specified user
-[x] `POST /post` adds new post
-[x] `GET /post/<post_id>` returns details of specified post
+[x] `POST /user` adds new user<br>
+[x] `GET /user/<user_id>` returns details of specified user<br>
+[x] `POST /post` adds new post<br>
+[x] `GET /post/<post_id>` returns details of specified post<br>
 [x] `GET /post/user/<user_id>` returns all post by specific user
 
 # Testing
 
 `cd testing`
 
-[x] `/user` - 5 tests cases
-[x] `/user/<user_id>` - 4 tests cases
-[x] `/post` - 5 tests cases
-[x] `/post/<post_id>` - 4 tests cases
-[x] `/post/user/<user_id>`- 3 tests cases
+[x] `/user` - 5 tests cases<br>
+[x] `/user/<user_id>` - 4 tests cases<br>
+[x] `/post` - 5 tests cases<br>
+[x] `/post/<post_id>` - 4 tests cases<br>
+[x] `/post/user/<user_id>`- 3 tests cases<br>
 
 # About Database
 
-1. Uses mongodb Atlas, and connects via url.
-2. uses a temporary user
+1. Uses mongodb Atlas, and connects via url.<br>
+2. uses a temporary user<br>
 
 # About Data
 
