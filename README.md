@@ -20,7 +20,7 @@ Submitted on 9th October, 2021
 [x] `/user/<user_id>` - 4 tests cases
 [x] `/post` - 5 tests cases
 [x] `/post/<post_id>` - 4 tests cases
-[] `/post/user/<user_id>`- \_ tests cases
+[x] `/post/user/<user_id>`- 3 tests cases
 
 # About Database
 
@@ -29,7 +29,7 @@ Submitted on 9th October, 2021
 
 # About Data
 
-3 accounts are available now.
+4 accounts are available now.
 
 ```
 id: 6161447d56188e12db944c80
@@ -46,5 +46,10 @@ number of posts: 4
 id: 6160baddd5efcdffb10eab63
 email: emal2@gmail.com
 name: sdvsdvc
+number of posts: 1
+
+id: 61619a2d51169d1757ad2021
+name: "test"
+email: "test@test.com"
 number of posts: 1
 ```
