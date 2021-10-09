@@ -14,11 +14,13 @@ Submitted on 9th October, 2021
 
 # Testing
 
-[x] `/user` - 3 tests
-[] `/user/<user_id>` - _ tests
-[] `/post` - _ tests
-[] `/post/<post_id>` - _ tests
-[] `/post/user/<user_id>` - _ tests
+`cd testing`
+
+[x] `/user` - 5 tests cases
+[] `/user/<user_id>` - _ tests cases
+[] `/post` - _ tests cases
+[] `/post/<post_id>` - _ tests cases
+[] `/post/user/<user_id>` - _ tests cases
 
 # About Database
 
