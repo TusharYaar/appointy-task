@@ -28,6 +28,7 @@ use `go run main.go` to start the server
 - [x] `POST /post` adds new post<br>
 - [x] `GET /post/<post_id>` returns details of specified post<br>
 - [x] `GET /post/user/<user_id>` returns all post by specific user
+- [x] `GET /post/user/<user_id>?page=<page_no>&limit=<limit>` returns all post by specific user with pagination
 
 # Testing
 
