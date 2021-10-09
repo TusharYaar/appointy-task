@@ -15,7 +15,15 @@ import (
 
 
 func GetUser(response http.ResponseWriter, request *http.Request) {
+	
 	response.Header().Add("Content-Type", "application/json")
+	
+	if request.Method != "GET" {
+		response.WriteHeader(http.StatusMethodNotAllowed)
+		response.Write([]byte(`{"message":"method not allowed"}`))
+		return 
+	}
+	
 
 	var user models.User
 
@@ -27,13 +35,13 @@ func GetUser(response http.ResponseWriter, request *http.Request) {
 	userId, err := primitive.ObjectIDFromHex(parts[2])
 	if err != nil {
 		response.WriteHeader(http.StatusBadRequest)
-		response.Write([]byte("Invalid user id"))
+		response.Write([]byte(`{"message":"Invalid user id"}`))
 		return
 	}
-	err = connection.UserCollection.FindOne(context.TODO(), bson.D{{"_id",userId}}).Decode(&user)
+	err = connection.UserCollection.FindOne(context.TODO(), bson.D{primitive.E{Key:"_id", Value: userId}}).Decode(&user)
 	if err == mongo.ErrNoDocuments {
 		response.WriteHeader(http.StatusNotFound)
-		response.Write([]byte("User not found"))
+		response.Write([]byte(`{"message":"User not found"}`))
 		return
 	}
 	json.NewEncoder(response).Encode(user)

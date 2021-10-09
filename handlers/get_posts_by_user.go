@@ -9,11 +9,20 @@ import (
 	"github.com/tusharyaar/task/connection"
 	"github.com/tusharyaar/task/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
 func GetPostsByUser(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
+
+		
+	if request.Method != "GET" {
+		response.WriteHeader(http.StatusMethodNotAllowed)
+		response.Write([]byte(`{"message":"method not allowed"}`))
+		return 
+	}
+	
 
 	var allPosts[] models.Post
 
@@ -31,7 +40,7 @@ func GetPostsByUser(response http.ResponseWriter, request *http.Request) {
 
 	userId := parts[3]
 
-	cur, err := connection.PostCollection.Find(context.TODO(), bson.D{{"user_id",userId}})
+	cur, err := connection.PostCollection.Find(context.TODO(), bson.D{primitive.E{Key:"user_id", Value:userId}})
 
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
@@ -45,7 +54,7 @@ func GetPostsByUser(response http.ResponseWriter, request *http.Request) {
 
 		if err != nil {
 			response.WriteHeader(http.StatusInternalServerError)
-			response.Write([]byte("Error while decoding post"))
+			response.Write([]byte(`{"message":"Error while decoding post"}`))
 			return 
 		}
 
@@ -55,7 +64,7 @@ func GetPostsByUser(response http.ResponseWriter, request *http.Request) {
 	
 	if len(allPosts) == 0 {
 		response.WriteHeader(http.StatusNotFound)
-		response.Write([]byte("Post not found"))
+		response.Write([]byte(`{"message":"Post not found"}`))
 		return
 	}
 	json.NewEncoder(response).Encode(allPosts)

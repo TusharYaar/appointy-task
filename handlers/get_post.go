@@ -17,6 +17,14 @@ import (
 func GetPost(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 
+		
+	if request.Method != "GET" {
+		response.WriteHeader(http.StatusMethodNotAllowed)
+		response.Write([]byte(`{"message":"method not allowed"}`))
+		return 
+	}
+	
+
 	var post models.Post
 
 	parts := strings.Split(request.URL.Path, "/")
@@ -27,13 +35,13 @@ func GetPost(response http.ResponseWriter, request *http.Request) {
 	postId, err := primitive.ObjectIDFromHex(parts[2])
 	if err != nil {
 		response.WriteHeader(http.StatusBadRequest)
-		response.Write([]byte("Invalid post id"))
+		response.Write([]byte(`{"message":"Invalid post id"}`))
 		return
 	}
-	err = connection.PostCollection.FindOne(context.TODO(), bson.D{{"_id",postId}}).Decode(&post)
+	err = connection.PostCollection.FindOne(context.TODO(), bson.D{primitive.E{Key:"_id", Value: postId}}).Decode(&post)
 	if err == mongo.ErrNoDocuments {
 		response.WriteHeader(http.StatusNotFound)
-		response.Write([]byte("Post not found"))
+		response.Write([]byte(`{"message":"Post not found"}`))
 		return
 	}
 	json.NewEncoder(response).Encode(post)

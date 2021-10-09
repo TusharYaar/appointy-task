@@ -16,25 +16,32 @@ import (
 
 func CreateUser(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
-	if request.Method == "POST" {		
-		ct := request.Header.Get("content-type")
+	// Returns if request is not post
+	if request.Method != "POST" {
+		response.WriteHeader(http.StatusMethodNotAllowed)
+		response.Write([]byte(`{"message":"method not allowed"}`))
+		return 
+	}
+	// Returns if application/json is not in header
+	ct := request.Header.Get("content-type")
 	if ct != "application/json" {
 		response.WriteHeader(http.StatusUnsupportedMediaType)
-		response.Write([]byte(fmt.Sprintf("expected content-type 'application/json', but got '%s'", ct)))
+		response.Write([]byte(fmt.Sprintf(`{"message":"expected content-type 'application/json', but got '%s'"}`, ct)))
 		return
 	}
 	var user models.User
 	var existing_user models.User
 	json.NewDecoder(request.Body).Decode(&user)
-
+	
+	// check for empty fields
 	if(user.Email == "" || user.Password == "" || user.Name == "" || user.Id !=primitive.NilObjectID){
 		response.WriteHeader(http.StatusBadRequest)
-		response.Write([]byte("Please provide all the required fields"))
+		response.Write([]byte(`{"message":"Please provide all the required fields"}`))
 		return
 	}
 
 	// Checking for exising user
-	err:= connection.UserCollection.FindOne(context.TODO(), bson.D{{"email",user.Email}}).Decode(&existing_user)
+	err:= connection.UserCollection.FindOne(context.TODO(), bson.D{primitive.E{ Key: "email",Value: user.Email}}).Decode(&existing_user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			// Hashing the password
@@ -47,13 +54,9 @@ func CreateUser(response http.ResponseWriter, request *http.Request) {
 	} else {
 		// User already exists
 		response.WriteHeader(http.StatusConflict)
-		response.Write([]byte("User already exists"))
+		response.Write([]byte(`{"message":"User already exists"}`))
 		return
 	}
 
-} else {
-	response.WriteHeader(http.StatusMethodNotAllowed)
-	response.Write([]byte("method not allowed"))
-}
 	
 }
