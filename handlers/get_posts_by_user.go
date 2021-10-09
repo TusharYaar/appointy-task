@@ -4,12 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/tusharyaar/task/connection"
 	"github.com/tusharyaar/task/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 
@@ -39,8 +41,15 @@ func GetPostsByUser(response http.ResponseWriter, request *http.Request) {
 	}
 
 	userId := parts[3]
+	options := options.Find()
+	page, limit := Pagination(request, options)
 
-	cur, err := connection.PostCollection.Find(context.TODO(), bson.D{primitive.E{Key:"user_id", Value:userId}})
+	// add pagination value to header
+	response.Header().Add("pagination-page", strconv.Itoa(int(page)))
+	response.Header().Add("pagination-limit", strconv.Itoa(int(limit)))
+	// fmt.Printf("Page: %d, Limit: %d", page, limit)
+
+	cur, err := connection.PostCollection.Find(context.TODO(), bson.D{primitive.E{Key:"user_id", Value:userId}},options)
 
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
@@ -68,4 +77,29 @@ func GetPostsByUser(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 	json.NewEncoder(response).Encode(allPosts)
+}
+
+
+// Function for pagination
+// Expects page and limit as query parameters
+// Returns page and limit as int64
+func Pagination(request *http.Request, FindOptions *options.FindOptions) (int64, int64) {
+    var page, limit int64 
+	if request.URL.Query().Get("limit") != "" && request.URL.Query().Get("page") != "" {
+		limit, _ = strconv.ParseInt(request.URL.Query().Get("limit"), 10, 32)
+		page, _ = strconv.ParseInt(request.URL.Query().Get("page"), 10, 32)
+        if page == 1 {
+            FindOptions.SetSkip(0)
+            FindOptions.SetLimit(limit)
+            return page, limit
+        }
+
+        FindOptions.SetSkip((page - 1) * limit)
+        FindOptions.SetLimit(limit)
+        return page, limit
+
+    }
+    FindOptions.SetSkip(0)
+    FindOptions.SetLimit(0)
+    return 0, 0
 }
