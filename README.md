@@ -12,6 +12,14 @@ Submitted on 9th October, 2021
 [x] `GET /post/<post_id>` returns details of specified post
 [x] `GET /post/user/<user_id>` returns all post by specific user
 
+# Testing
+
+[x] `/user` - 3 tests
+[] `/user/<user_id>` - _ tests
+[] `/post` - _ tests
+[] `/post/<post_id>` - _ tests
+[] `/post/user/<user_id>` - _ tests
+
 # About Database
 
 1. Uses mongodb Atlas, and connects via url.
@@ -36,5 +44,5 @@ number of posts: 4
 id: 6160baddd5efcdffb10eab63
 email: emal2@gmail.com
 name: sdvsdvc
-number of posts: 0
+number of posts: 1
 ```

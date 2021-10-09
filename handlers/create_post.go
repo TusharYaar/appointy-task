@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -58,7 +59,7 @@ func CreatePost(response http.ResponseWriter, request *http.Request) {
 				response.Write([]byte(`{"message":"User does not exists"}`))
 				return
 		}  else {
-			panic(err)
+			log.Fatal(err)
 		}
 	} else {
 		// User exists, create post

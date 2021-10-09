@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	// Connection contains function to connect to database and defines collection
@@ -35,7 +36,7 @@ func main() {
 	// Listener
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 

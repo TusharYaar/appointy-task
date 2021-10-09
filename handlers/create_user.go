@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/tusharyaar/task/connection"
@@ -50,7 +51,7 @@ func CreateUser(response http.ResponseWriter, request *http.Request) {
 			response.WriteHeader(http.StatusCreated)
 			json.NewEncoder(response).Encode(result)
 		}  else {
-			panic(err)
+			log.Fatal(err)
 		}
 	} else {
 		// User already exists
