@@ -17,10 +17,10 @@ Submitted on 9th October, 2021
 `cd testing`
 
 [x] `/user` - 5 tests cases
-[] `/user/<user_id>` - _ tests cases
+[x] `/user/<user_id>` - 4 tests cases
 [] `/post` - _ tests cases
 [] `/post/<post_id>` - _ tests cases
-[] `/post/user/<user_id>` - _ tests cases
+[] `/post/user/<user_id>`- \_ tests cases
 
 # About Database
 
