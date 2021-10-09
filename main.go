@@ -13,9 +13,11 @@ func main() {
 	client,ctx,cancel := connection.Connect()
 	// responds to GET /user/<user_id>
 	http.HandleFunc("/user/",handlers.GetUser)
+
 	// responds to POST /user
 	http.HandleFunc("/user",handlers.CreateUser)
-// responds to Post /post
+
+	// responds to Post /post
 	http.HandleFunc("/post",handlers.CreatePost)
 
 	// responds to GET /post/<post_id>
@@ -24,7 +26,7 @@ func main() {
 	// responds to GET /posts/user/<user_id>
 	http.HandleFunc("/posts/user/",handlers.GetPostsByUser)
 
-// These Run after the server closes
+	// These Run after the server closes
 	defer client.Disconnect(ctx)
 	defer cancel()
 
