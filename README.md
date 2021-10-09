@@ -5,6 +5,21 @@ Made by Tushar S Agrawal<br>
 Reg no: 19BCE0559<br>
 Submitted on 9th October, 2021<br>
 
+# Installation
+
+clone the repo
+
+make sure you are in root folder
+
+run `go get go.mongodb.org/mongo-driver/mongo` to install mongo drivers
+
+use `go run main.go` to start the server
+
+#### For Testing
+
+`cd testing`
+`go test`
+
 # Routes
 
 [x] `POST /user` adds new user<br>
@@ -61,15 +76,15 @@ number of posts: 1
 |- root
     |-connection
         |-connection.go
-    |-handlers                  //contains route handlers
-        |-create_post.go        // POST /post
-        |-create_user.go        // POST /user
-        |-get_post.go           // GET /post/<post_id>
-        |-get_posts_by_user.go  // GET /posts/user/<user_id>
-        |-get_user.go           // GET /user/<user_id>
-    |-models
-        |-post.go
-        |-user.go
+    |-handlers                      //contains route handlers
+        |-create_post.go            // POST /post
+        |-create_user.go            // POST /user
+        |-get_post.go               // GET /post/<post_id>
+        |-get_posts_by_user.go      // GET /posts/user/<user_id>
+        |-get_user.go               // GET /user/<user_id>
+    |-models                        //contains models for user and post
+        |-post.go                   //post struct
+        |-user.go                   //user struct
     |-testing                       //contains unit test for handlers
         |-create_post_test.go       //POST /post
         |-create_user_test.go       // POST /user
