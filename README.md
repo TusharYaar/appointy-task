@@ -38,7 +38,7 @@ use `go run main.go` to start the server
 - [x] `/user/<user_id>` - 4 tests cases<br>
 - [x] `/post` - 5 tests cases<br>
 - [x] `/post/<post_id>` - 4 tests cases<br>
-- [x] `/post/user/<user_id>`- 3 tests cases<br>
+- [x] `/post/user/<user_id>`- 5 tests cases<br>
 
 # About Database
 
